@@ -53,7 +53,7 @@ export class PhotoUploadComponent implements OnInit {
     return this.fb.group({
       name: this.fb.control<string>('', [Validators.required]),
       title: this.fb.control<string>('', [Validators.required]),
-      comments: this.fb.control<string>('', [Validators.required]),
+      comments: this.fb.control<string>(''),
       archive: this.fb.control(null, [Validators.required])
     });
   }

@@ -1,6 +1,7 @@
 package ibf2022.batch2.csf.backend.services;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,13 @@ public class UploadService {
 
     public void recordBundle(Archive bundle) {
         this.archiveRepo.recordBundle(bundle);
+    }
+
+    public Optional<Archive> getBundleByBundleId(String bundleId) {
+        try {
+            return archiveRepo.getBundleByBundleId(bundleId);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }

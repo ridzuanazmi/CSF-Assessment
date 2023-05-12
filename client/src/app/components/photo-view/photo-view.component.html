@@ -1,1 +1,15 @@
-<p>photo-view works!</p>
+<h2> {{title}} </h2>
+
+<h4> by {{name}} on {{uploadDate}} </h4>
+
+<h5> {{comments}} </h5>
+
+<table>
+    <tr *ngFor="let url of imgUrl">
+        <td>
+            <img [src]="url" alt="Image">
+        </td>
+    </tr>
+</table>
+
+<button type="button" [routerLink]="['/upload']">Back</button>

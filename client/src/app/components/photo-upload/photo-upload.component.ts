@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SbapiService } from 'src/app/services/sbapi.service';
 
 @Component({
@@ -14,10 +15,12 @@ export class PhotoUploadComponent implements OnInit {
   // hence we use uploaded picture instead
   @ViewChild('file') zipFile!: ElementRef;
   uploadForm!: FormGroup;
+  bundleId!: string;
 
   constructor(
     private fb: FormBuilder,
-    private apiSrvc: SbapiService) { }
+    private apiSrvc: SbapiService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.uploadForm = this.createUploadForm();
@@ -35,12 +38,14 @@ export class PhotoUploadComponent implements OnInit {
 
     this.apiSrvc.upload(formData)
     .then((res) => {
-      console.log("onSubmit(): response = ", res)
+      console.log("onSubmit(): response = ", res);
+      this.bundleId = res.bundleId;
+      this.router.navigate(['/view', this.bundleId]); // navigate to View 2 with bundleId params
     })
     .catch((err) => {
-      console.error("upload(): error = ", err)
+      alert(err); // dialog pop up box
+      console.error("upload(): error = ", err);
     })
-
     this.uploadForm.reset();
   }
 

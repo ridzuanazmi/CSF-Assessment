@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "archives")
+
 public class Archive {
     
     public String bundleId;

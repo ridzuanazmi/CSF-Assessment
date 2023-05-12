@@ -7,7 +7,7 @@ import { PhotoViewComponent } from './components/photo-view/photo-view.component
 const routes: Routes = [
   { path:'', component: PhotoStorageComponent },
   { path:'upload', component: PhotoUploadComponent },
-  { path:'view', component: PhotoViewComponent },
+  { path:'view/:bundleId', component: PhotoViewComponent },
   { path: "**", redirectTo: "/", pathMatch: "full"}
 
 ];

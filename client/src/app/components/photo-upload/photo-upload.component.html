@@ -29,7 +29,7 @@
                 <button type="button" [routerLink]="['/']">Cancel</button>
             </td>
             <td>
-                <button type="submit">Submit</button>
+                <button type="submit" [disabled]="uploadForm.invalid">Submit</button>
             </td>
         </tr>
     </table>

@@ -60,7 +60,7 @@ public class ArchiveRepository {
 	// Do not change the method's name
 	// Write the native mongo query that you will be using in this method
 	//
-	//
+	// db.archives.find()
 	public List<Archive> getBundles() {
 		return mongoTemplate.findAll(Archive.class, "archives");
 	}

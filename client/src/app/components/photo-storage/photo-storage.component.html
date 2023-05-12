@@ -1,2 +1,10 @@
-<p>photo-storage works!</p>
+<h2>Photo Storage</h2>
+
 <button type="button" [routerLink]="['/upload']">Upload</button>
+
+<table>
+    <tr *ngFor="let i of archives">
+        <td> {{i.title}} </td>
+        <td> {{i.date}} </td>
+    </tr>
+</table>

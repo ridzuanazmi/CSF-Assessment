@@ -34,7 +34,7 @@ export class PhotoViewComponent implements OnInit, OnDestroy {
   }
 
   loadArchives() {
-    this.apiSrvc.getBundle(this.bundleId)
+    this.apiSrvc.getBundlebyBundleId(this.bundleId)
     .then((response) => {
       // Handle successful response here
       console.log("Response:", response);

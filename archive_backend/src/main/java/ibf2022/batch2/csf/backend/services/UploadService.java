@@ -6,15 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import ibf2022.batch2.csf.backend.models.Archive;
+import ibf2022.batch2.csf.backend.repositories.ArchiveRepository;
 import ibf2022.batch2.csf.backend.repositories.ImageRepository;
 
 @Service
 public class UploadService {
-    
+
     @Autowired
     private ImageRepository imgRepo;
 
-    public void upload(MultipartFile zipFile) throws IOException {
-        this.imgRepo.upload(zipFile);
+    @Autowired
+    private ArchiveRepository archiveRepo;
+
+    public Archive upload(MultipartFile zipFile, String title, String name, String comments) throws IOException {
+        return this.imgRepo.upload(zipFile, title, name, comments);
+    }
+
+    public void recordBundle(Archive bundle) {
+        this.archiveRepo.recordBundle(bundle);
     }
 }

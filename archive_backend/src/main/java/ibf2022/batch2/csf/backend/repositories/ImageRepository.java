@@ -2,8 +2,12 @@ package ibf2022.batch2.csf.backend.repositories;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -19,6 +23,8 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+import ibf2022.batch2.csf.backend.models.Archive;
+
 @Repository
 public class ImageRepository {
 
@@ -31,12 +37,18 @@ public class ImageRepository {
 	// TODO: Task 3
 	// You are free to change the parameter and the return type
 	// Do not change the method's name
-	// Upload file into S3
-	public void upload(MultipartFile zipFile) throws IOException {
+	// Upload file into S3, returns a List<String> or URL from S3 bucket
+	public Archive upload(MultipartFile zipFile, String title, String name, String comments) throws IOException {
 
 		Tika tika = new Tika();
 		ZipInputStream zis = new ZipInputStream(zipFile.getInputStream());
 		ZipEntry zipEntry = zis.getNextEntry();
+
+		// Generate a unique bundleId
+		String bundleId = UUID.randomUUID().toString().substring(0, 8);
+
+		// Maintain a list to keep track of uploaded file URLs
+		List<String> uploadedUrls = new ArrayList<>();
 
 		// Maintain a map to keep track of file names and their count
 		Map<String, Integer> fileNames = new HashMap<>();
@@ -69,6 +81,9 @@ public class ImageRepository {
 						metadata)
 						.withCannedAcl(CannedAccessControlList.PublicRead);
 				s3Client.putObject(request);
+
+				// Add the URL of the uploaded file to the list
+				uploadedUrls.add(s3Client.getUrl(bucketName, fileName).toString());
 			}
 
 			zipEntry = zis.getNextEntry();
@@ -76,6 +91,17 @@ public class ImageRepository {
 
 		zis.closeEntry();
 		zis.close();
+
+		// Save the info in the Archive object
+		Archive archive = new Archive();
+		archive.setBundleId(bundleId);
+		archive.setDate(new Date());
+		archive.setTitle(title);
+		archive.setName(name);
+		archive.setComments(comments);
+		archive.setUrls(uploadedUrls.toArray(new String[0]));
+		return archive;
+
 	} // end of upload()
 
 }

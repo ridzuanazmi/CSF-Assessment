@@ -3,8 +3,6 @@ package ibf2022.batch2.csf.backend.models;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 
 public class Archive {
     

@@ -15,22 +15,22 @@ export class SbapiService {
   upload(formData: FormData): Promise<any> {
     
     return firstValueFrom(
-      this.http.post('http://localhost:8080/upload', formData)
+      this.http.post(`/upload`, formData)
     );
   }
 
   // get bundleId from server
   getBundlebyBundleId(bundleId: string): Promise<any> {
-    const url = `http://localhost:8080/bundle/${bundleId}`;
+    // const url = `http://localhost:8080/bundle/${bundleId}`;
     const headers = new HttpHeaders().set("Accept", "application/json");
 
-    return lastValueFrom(this.http.get(url, { headers }));
+    return lastValueFrom(this.http.get(`/bundle/${bundleId}`, { headers }));
   }
 
   getBundles(): Promise<Archive[]> {
-    const url = 'http://localhost:8080/bundles';
+    // const url = 'http://localhost:8080/bundles';
     const headers = new HttpHeaders().set('Accept', 'application/json');
   
-    return lastValueFrom(this.http.get<Archive[]>(url, { headers }));
+    return lastValueFrom(this.http.get<Archive[]>(`/bundles`, { headers }));
   }
 }

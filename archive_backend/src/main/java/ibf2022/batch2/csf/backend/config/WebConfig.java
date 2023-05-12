@@ -17,8 +17,8 @@ import com.mongodb.client.MongoClients;
 @Configuration
 public class WebConfig {
     
-    // @Value("${MONGO_URL}")
-    // private String mongoUrl;
+    @Value("${MONGO_URL}")
+    private String mongoUrl;
 
     @Value("${DO_STORAGE_KEY}")
     private String accessKey;
@@ -51,10 +51,10 @@ public class WebConfig {
             .build();
     }
 
-    // @Bean
-    // public MongoTemplate createMongoTemplate() {
-    //     // Create a MongoClient
-    //     MongoClient client = MongoClients.create(mongoUrl);
-    //     return new MongoTemplate(client, "csfass"); // REMEMBER TO CHANGE THE DATABASE NAME
-    // }
+    @Bean
+    public MongoTemplate createMongoTemplate() {
+        // Create a MongoClient
+        MongoClient client = MongoClients.create(mongoUrl);
+        return new MongoTemplate(client, "csfass"); // REMEMBER TO CHANGE THE DATABASE NAME
+    }
 }

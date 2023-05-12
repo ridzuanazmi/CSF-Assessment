@@ -1,6 +1,7 @@
 package ibf2022.batch2.csf.backend.services;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,9 @@ public class UploadService {
         } catch (Exception e) {
             return Optional.empty();
         }
+    }
+
+    public List<Archive> getBundles() {
+        return this.archiveRepo.getBundles();
     }
 }

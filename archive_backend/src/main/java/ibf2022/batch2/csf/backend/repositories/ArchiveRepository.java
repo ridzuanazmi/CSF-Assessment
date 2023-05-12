@@ -1,5 +1,6 @@
 package ibf2022.batch2.csf.backend.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class ArchiveRepository {
 	 * ],
 	 * })
 	 */
+	// db.archives.insertOne(bundle)
 	public void recordBundle(Archive bundle) {
 		mongoTemplate.insert(bundle, "archives");
 	}
@@ -45,10 +47,9 @@ public class ArchiveRepository {
 	// You are free to change the parameter and the return type
 	// Do not change the method's name
 	// Write the native mongo query that you will be using in this method
-	//
-	//
+	// db.archives.findOne({ "bundleId": bundleId })
 	public Optional<Archive> getBundleByBundleId(String bundleId) {
-		
+
 		Query query = new Query(Criteria.where("bundleId").is(bundleId));
 		Archive archive = mongoTemplate.findOne(query, Archive.class, "archives");
 		return Optional.ofNullable(archive);
@@ -60,8 +61,8 @@ public class ArchiveRepository {
 	// Write the native mongo query that you will be using in this method
 	//
 	//
-	public Object getBundles(/* any number of parameters here */) {
-		return null;
+	public List<Archive> getBundles() {
+		return mongoTemplate.findAll(Archive.class, "archives");
 	}
 
 }

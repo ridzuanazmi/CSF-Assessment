@@ -2,6 +2,7 @@ package ibf2022.batch2.csf.backend.controllers;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -76,5 +77,20 @@ public class UploadController {
 	}
 
 	// TODO: Task 6
+	// GET /bundles
+	// Accept: application/json
+	// Returns all the Document in MongoDB
+	@GetMapping(path = "/bundles", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getBundles() {
+		
+		List<Archive> archiveList = this.uploadSrvc.getBundles();
 
+		if (!archiveList.isEmpty()) {
+			return ResponseEntity.ok(archiveList);
+		} else {
+			Map<String, String> responseMessage = new HashMap<>();
+			responseMessage.put("error", "No bundles found");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMessage);
+		}
+	}
 }

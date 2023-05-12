@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './photo-storage.component.html',
   styleUrls: ['./photo-storage.component.css']
 })
-export class PhotoStorageComponent {
+export class PhotoStorageComponent implements OnInit {
 
 }

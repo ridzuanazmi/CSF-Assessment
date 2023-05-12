@@ -1,0 +1,36 @@
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td>
+                <input type="text" formControlName="name">
+            </td>
+        </tr>
+        <tr>
+            <td>Title: </td>
+            <td>
+                <input type="text" formControlName="title">
+            </td>
+        </tr>
+        <tr>
+            <td>Comments: </td>
+            <td>
+                <input type="text" formControlName="comments">
+            </td>
+        </tr>
+        <tr>
+            <td>Archive: </td>
+            <td>
+                <input type="file" formControlName="archive" #file>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" [routerLink]="['/']">Cancel</button>
+            </td>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>

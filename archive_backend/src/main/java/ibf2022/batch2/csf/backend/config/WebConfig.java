@@ -3,22 +3,18 @@ package ibf2022.batch2.csf.backend.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 
 @Configuration
 public class WebConfig {
     
-    @Value("${MONGO_URL}")
-    private String mongoUrl;
+    // @Value("${MONGO_URL}")
+    // private String mongoUrl;
 
     @Value("${DO_STORAGE_KEY}")
     private String accessKey;
@@ -32,10 +28,10 @@ public class WebConfig {
     @Value("${DO_STORAGE_ENDPOINT_REGION}")
     private String endPointRegion;
 
-    @Bean
-    public WebMvcConfigurer configureCors() {
-        return new EnableCors("/**", "*");
-    }
+    // @Bean
+    // public WebMvcConfigurer configureCors() {
+    //     return new EnableCors("/**", "*");
+    // }
 
     @Bean
     public AmazonS3 createS3Client() {
@@ -51,10 +47,10 @@ public class WebConfig {
             .build();
     }
 
-    @Bean
-    public MongoTemplate createMongoTemplate() {
-        // Create a MongoClient
-        MongoClient client = MongoClients.create(mongoUrl);
-        return new MongoTemplate(client, "csfass"); // REMEMBER TO CHANGE THE DATABASE NAME
-    }
+    // @Bean
+    // public MongoTemplate createMongoTemplate() {
+    //     // Create a MongoClient
+    //     MongoClient client = MongoClients.create(mongoUrl);
+    //     return new MongoTemplate(client, "csfass"); // REMEMBER TO CHANGE THE DATABASE NAME
+    // }
 }
